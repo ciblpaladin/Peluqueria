@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string("correo_cliente", 50);
             $table->string("password_cliente", 200);
             $table->unsignedBigInteger("ciudad_fk");
-            $table->boolean("delete_soft");
+            $table->boolean("delete_soft")->default(true);
 
 
             $table->foreign('ciudad_fk')->references('id')->on('cities')->onDelete('cascade');

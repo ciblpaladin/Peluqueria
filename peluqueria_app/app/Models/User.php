@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Rol;
+use App\Models\Statu;
 
 class User extends Model
 {
@@ -21,5 +23,16 @@ class User extends Model
     "rol_fk",
     "status_fk",
     "delete_soft"];
+
+
+    public function rol(){
+
+        return $this->belongsTo(Rol::class, "rol_fk","id");
+    }
+
+    public function status(){
+
+        return $this->belongsTo(Statu::class, "status_fk","id");
+    }
 }
 

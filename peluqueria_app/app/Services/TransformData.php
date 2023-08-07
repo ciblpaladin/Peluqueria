@@ -13,17 +13,17 @@ class TransformData{
         $keys = $post;
         $data_keys = array_keys($keys);
         
-        if($server["REQUEST_METHOD"] == "POST"){
+        if($server["REQUEST_METHOD"] == "POST" ){
             
             foreach($data_keys as $key){
-                if(strpos($key, "password") !== False){
+                    if(strpos($key, "password") !== False){
 
-                    $model->$key = EncrypPassword::Encrypt($post[$key]);
-                    
-                }else{
+                        $model->$key = EncrypPassword::Encrypt($post[$key]);
+                        
+                    }else{
 
-                    $model->$key = $post[$key];
-                }
+                        $model->$key = $post[$key];
+                    }
                     
             }   
         }
@@ -47,8 +47,7 @@ class TransformData{
             foreach($data_keys as $key){
                 
                     $model_find->$key = $post[$key];
-                    
-
+ 
             }
         }
         else{

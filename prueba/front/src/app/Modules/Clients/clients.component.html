@@ -1,0 +1,41 @@
+<div style="display: flex;">
+    <label for="">Filtrar</label>
+    <select [(ngModel)]="columValue" (ngModelChange)="setColumn()">
+        <option value="default" selected>Selecionar campo</option>
+        <option value="nombre_cliente">Nombres</option>
+        <option value="apellido_cliente">apellidos</option>
+        <option value="cedula_cliente">cedula</option>
+        <option value="celular_cliente">celular</option>
+        <option value="correo_cliente">correo</option>
+    </select>
+    <input type="text" [(ngModel)]="inputValue" (ngModelChange)="onInputChange()">
+</div>
+<div *ngIf="clients$ | async as clients">
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Cedula</th>
+            <th>Celular</th>
+            <th>Correo</th>
+            <th>Ciudad</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+        <a routerLink="form_clients/create">Crear</a>
+        <tr *ngFor="let client of clients | paginate:{itemsPerPage : list_page, currentPage: current_page_}">
+            <td>{{client.nombre_cliente}}</td>
+            <td>{{client.apellido_cliente}}</td>
+            <td>{{client.cedula_cliente}}</td>
+            <td>{{client.celular_cliente}}</td>
+            <td>{{client.correo_cliente}}</td>
+            <td>{{client.cities!.nombre_ciudad}}</td> 
+            <td><a routerLink="form_clients/edit/{{client.id}}">editar</a></td>
+            <td><a (click)="delete(client.id)">X</a></td>
+        </tr> 
+    </table>
+
+    <pagination-controls (pageChange)="change_page($event)"></pagination-controls>
+
+
+

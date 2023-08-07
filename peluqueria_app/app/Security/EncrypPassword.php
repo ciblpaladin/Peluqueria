@@ -11,4 +11,6 @@ class EncrypPassword{
         return password_hash($password, PASSWORD_DEFAULT);
 
     }
+
+    
 }

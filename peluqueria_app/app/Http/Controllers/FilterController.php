@@ -18,9 +18,9 @@ class FilterController extends Controller
         $this->filter_->set_model($model);
         
     }
-    public function filter($colums_filter){
+    public function filter($column, $values, $tables = null){
 
-        $data_model = $this->filter_->filterColums($colums_filter);
+        $data_model = $this->filter_->filterColums($column, $values, $tables);
 
         if(empty($data_model)){
             echo "No se encontraron datos";
@@ -29,4 +29,5 @@ class FilterController extends Controller
         }
         
     }
+
 }

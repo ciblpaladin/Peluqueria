@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger("sede_fk");
             $table->date("fecha_agenda");
             $table->time("hora_agenda");
-            $table->boolean("delete_soft");
+            $table->boolean("delete_soft")->default(true);
 
 
             $table->foreign('empleado_fk')->references('id')->on('users')->onDelete('cascade');

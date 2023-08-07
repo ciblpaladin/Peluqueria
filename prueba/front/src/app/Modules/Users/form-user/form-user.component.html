@@ -1,0 +1,76 @@
+<div>
+    
+<form action="" [formGroup]="user_form" (ngSubmit)="send()">
+
+    <div class="form-group">
+        <input type="text" formControlName="nombre_usuario" placeholder="Nombres" >
+        <div *ngIf="user_form.get('nombre_usuario')?.invalid && user_form.get('nombre_usuario')?.touched">
+            <div *ngIf="user_form.get('nombre_usuario')?.hasError('required')">Los nombres son obligatorios.</div>
+        </div>
+        <input type="text" formControlName="apellidos_usuario" placeholder="Apellidos">
+        <div *ngIf="user_form.get('apellidos_usuario')?.invalid && user_form.get('apellidos_usuario')?.touched">
+            <div *ngIf="user_form.get('apellidos_usuario')?.hasError('required')">Los apellidos son obligatorios.</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="text" formControlName="cedula_usuario"  placeholder="Cedula" >
+        <div *ngIf="user_form.get('cedula_usuario')?.invalid && user_form.get('cedula_usuario')?.touched" (focusout)="validate_field()">
+            <div *ngIf="user_form.get('cedula_usuario')?.hasError('required')">El numero de cedula es obligatorio.</div>
+            <div *ngIf="user_form.get('cedula_usuario')?.errors?.['maxlength'] || user_form.get('cedula_usuario')?.errors?.['minlength']">Inserte un numero de cedula valido.</div>
+            <div *ngIf="user_form.get('cedula_usuario')?.errors?.['pattern']">Este campo tiene que ser numerico.</div>
+        </div>
+        <div *ngIf="field_error">El numero de cedula ingresado ya existe</div>
+        <input type="text" formControlName="celular_usuario" placeholder="Celular">
+
+        <div *ngIf="user_form.get('celular_usuario')?.invalid && user_form.get('celular_usuario')?.touched">
+            <div *ngIf="user_form.get('celular_usuario')?.hasError('required')">El numero de celular es obligatorio.</div>
+            <div *ngIf="user_form.get('celular_usuario')?.errors?.['maxlength']">Inserte un numero de celular valido.</div>
+            <div *ngIf="user_form.get('celular_usuario')?.errors?.['minlength']">Inserte un numero de celular valido.</div>
+        </div>
+    </div>
+
+    <div class="form-group" *ngIf="selects$">
+        <select formControlName="status_fk">
+            <option value="" selected>Estado</option>
+            <option *ngFor="let statu of selects$.Statu" [value]="statu.id">{{statu.estado_rol}}</option>
+            
+        </select>
+        <div *ngIf="user_form.get('status_fk')?.invalid && user_form.get('status_fk')?.touched">
+            <div *ngIf="user_form.get('status_fk')?.hasError('required')">El estado del usuario es obligatorio.</div>
+        </div>
+        <select formControlName="rol_fk">
+            <option value="" selected>Rol</option>
+            <option *ngFor="let rol of selects$.Rol" [value]="rol.id">{{rol.nombre_rol}}</option>
+            
+        </select>
+        <div *ngIf="user_form.get('rol_fk')?.invalid && user_form.get('rol_fk')?.touched">
+            <div *ngIf="user_form.get('rol_fk')?.hasError('required')">El rol del usuario en el sistema es obligatorio.</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input *ngIf="accion =='create'" type="password" placeholder="Contraseña" formControlName="password_usuario" (focusout)="validate()">
+
+        <div *ngIf="user_form.get('password_usuario')?.invalid && user_form.get('password_usuario')?.touched">
+            <div *ngIf="user_form.get('password_usuario')?.hasError('required')">La contraseña es obligatoria.</div>
+            <div *ngIf="user_form.get('password_usuario')?.errors?.['minlength']">El numero de caracteres minimo es de 10.</div>
+        </div>
+
+        <input  *ngIf="accion =='create'" type="password" placeholder="Confirmar contraseña" (focusout)="validate()" formControlName="password_confirm">
+        <div *ngIf="password_error">Las contraseñas no coinciden</div>
+    </div>
+
+    <div class="form-group">
+        <input type="text" placeholder="Correo" formControlName="correo_usuario" required="">
+        <div *ngIf="user_form.get('correo_usuario')?.invalid && user_form.get('correo_usuario')?.touched">
+            <div *ngIf="user_form.get('correo_usuario')?.hasError('email')">Inserte un correo valido.</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-success">Guardar</button>
+
+    </div>
+</form>
+
+</div>
