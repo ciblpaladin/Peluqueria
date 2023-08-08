@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('table_availability', function (Blueprint $table) {
+        Schema::create('states_availability', function (Blueprint $table) {
             $table->id();
+            $table->string("nombre_estado");
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_availability');
+        Schema::dropIfExists('table_states_availability');
     }
 };

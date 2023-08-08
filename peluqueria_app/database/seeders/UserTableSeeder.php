@@ -15,7 +15,7 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(20000)->create();
+        User::factory(500)->create();
     }
 
     //php artisan db:seed --class=RolTableSeeder
